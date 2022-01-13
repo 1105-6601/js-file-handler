@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FileHandler</title>
+</head>
+<body>
+<input type="file">
+<script type="module">
+  import { FileHandler } from './file-handler.js';
+
+   (() => {
+     document.querySelector('[type="file"]').addEventListener('change', (event) => {
+
+       const file = event.target.files[0];
+
+       // Convert blob to base64.
+       FileHandler.toBase64(file).then(base64 => {
+         // Convert base64 to blob.
+         const blob = FileHandler.fromBase64(base64);
+       });
+
+       // Resize image.
+       FileHandler.resizeImage(file).then(blob => {
+         // Resized blob created.
+       });
+     });
+
+     // Create blob from network image.
+     FileHandler.fromNetwork('https://placekitten.com/200/300').then(blob => {
+       // Blob created.
+     });
+   })();
+</script>
+
+</body>
+</html>

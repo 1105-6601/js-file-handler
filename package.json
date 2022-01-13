@@ -1,0 +1,33 @@
+{
+  "name": "@tkzo/js-file-handler",
+  "version": "1.0.0",
+  "description": "File handler for JavaScript",
+  "main": "file-handler.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1105-6601/js-file-handler.git"
+  },
+  "keywords": [
+    "filehandler"
+  ],
+  "author": "Tkzo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1105-6601/js-file-handler/issues"
+  },
+  "homepage": "https://github.com/1105-6601/js-file-handler#readme",
+  "type": "module",
+  "types": "file-handler.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "canvas": "^2.8.0",
+    "jest": "^27.4.6"
+  },
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
+  }
+}
