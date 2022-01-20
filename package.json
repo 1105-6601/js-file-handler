@@ -1,6 +1,6 @@
 {
   "name": "@tkzo/js-file-handler",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "File handler for JavaScript",
   "main": "file-handler.js",
   "repository": {
