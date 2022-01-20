@@ -59,3 +59,9 @@ npm i @tkzo/js-file-handler --save
      // ...
    });
    ```
+
+- Identify MimeType
+
+   ```javascript
+   const mimeType = FileHandler.identifyMimeTypeFromBase64(base64);
+   ```

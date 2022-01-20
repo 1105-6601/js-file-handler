@@ -1,7 +1,6 @@
 'use strict';
 
-export class FileHandler
-{
+export class FileHandler {
   static toBase64(blob)
   {
     const reader  = new FileReader();
@@ -108,13 +107,47 @@ export class FileHandler
 
   static arrayBufferToBase64(arrayBuffer)
   {
-    const typedArray  = new Uint8Array(arrayBuffer);
-    const buffer      = 1024;
-    let binaryString  = '';
+    const typedArray = new Uint8Array(arrayBuffer);
+    const buffer     = 1024;
+    let binaryString = '';
     for (let i = 0; i < typedArray.length; i += buffer) {
       binaryString += String.fromCharCode.apply(null, typedArray.slice(i, i + buffer));
     }
 
     return btoa(binaryString);
+  }
+
+  static identifyMimeTypeFromBase64(base64)
+  {
+    const signatures = [
+      {
+        'mimeType':   'application/pdf',
+        'startsWith': 'JVBERi0',
+      },
+      {
+        'mimeType':   'image/gif',
+        'startsWith': 'R0lGODdh',
+      },
+      {
+        'mimeType':   'image/gif',
+        'startsWith': 'R0lGODlh',
+      },
+      {
+        'mimeType':   'image/png',
+        'startsWith': 'iVBORw0KGgo',
+      },
+      {
+        'mimeType':   'image/jpg',
+        'startsWith': '/9j/',
+      },
+    ];
+
+    for (const item of signatures) {
+      if (base64.startsWith(item.startsWith)) {
+        return item.mimeType;
+      }
+    }
+
+    throw new Error('Failed to identify mime type.');
   }
 }

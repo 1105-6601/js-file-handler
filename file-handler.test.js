@@ -96,4 +96,63 @@ describe('FileHandlerのテスト', () => {
       expect(base64.endsWith('+xSEhlVn8oYC0zoijitL27IZMtIGHPFwwQANXmKF5hui/OZmiRk4MplUWjHBMxtqXy56n//2Q==')).toBeTruthy();
     });
   });
+
+  describe('Base64からMimeTypeを識別する', () => {
+
+    describe('PDFファイル', () => {
+
+      let pdf;
+
+      beforeEach(() => {
+        const buffer = fs.readFileSync(path.join(process.cwd(), '/assets/test.pdf'));
+        pdf          = FileHandler.arrayBufferToBase64(buffer);
+      });
+
+      it('MimeTypeが`application/pdf`と識別される', () => {
+        expect(FileHandler.identifyMimeTypeFromBase64(pdf)).toBe('application/pdf');
+      });
+    });
+
+    describe('GIFファイル', () => {
+
+      let gif;
+
+      beforeEach(() => {
+        const buffer = fs.readFileSync(path.join(process.cwd(), '/assets/test.gif'));
+        gif          = FileHandler.arrayBufferToBase64(buffer);
+      });
+
+      it('MimeTypeが`image/gif`と識別される', () => {
+        expect(FileHandler.identifyMimeTypeFromBase64(gif)).toBe('image/gif');
+      });
+    });
+
+    describe('PNGファイル', () => {
+
+      let png;
+
+      beforeEach(() => {
+        const buffer = fs.readFileSync(path.join(process.cwd(), '/assets/test.png'));
+        png          = FileHandler.arrayBufferToBase64(buffer);
+      });
+
+      it('MimeTypeが`image/png`と識別される', () => {
+        expect(FileHandler.identifyMimeTypeFromBase64(png)).toBe('image/png');
+      });
+    });
+
+    describe('JPGファイル', () => {
+
+      let jpg;
+
+      beforeEach(() => {
+        const buffer = fs.readFileSync(path.join(process.cwd(), '/assets/test.jpg'));
+        jpg          = FileHandler.arrayBufferToBase64(buffer);
+      });
+
+      it('MimeTypeが`image/jpg`と識別される', () => {
+        expect(FileHandler.identifyMimeTypeFromBase64(jpg)).toBe('image/jpg');
+      });
+    });
+  });
 });
